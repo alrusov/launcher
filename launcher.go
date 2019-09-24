@@ -47,8 +47,8 @@ func memStats(cc *config.Common) {
 
 			for {
 				runtime.ReadMemStats(&mem)
-				log.Message(level, "AllocSys %d, HeapSys %d, HeapAlloc %d; NumCPU: %d; GoMaxProcs: %d; NumGoroutine: %d",
-					mem.Sys, mem.HeapSys, mem.HeapAlloc, runtime.NumCPU(), runtime.GOMAXPROCS(-1), runtime.NumGoroutine())
+				log.Message(level, "AllocSys %d, HeapSys %d, StackSys: %d; NumCPU: %d; GoMaxProcs: %d; NumGoroutine: %d",
+					mem.Sys, mem.HeapSys, mem.StackSys, runtime.NumCPU(), runtime.GOMAXPROCS(-1), runtime.NumGoroutine())
 				if !misc.Sleep(delay) {
 					break
 				}
