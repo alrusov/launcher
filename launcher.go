@@ -107,6 +107,8 @@ func Go(a Application, cfg interface{}) {
 					listener.Stop()
 				}()
 
+				log.Message(log.INFO, "Press Ctrl+C for exit")
+
 				if err := listener.Start(); err != nil {
 					log.Message(log.CRIT, "Start listener error: %s", err.Error())
 				}
