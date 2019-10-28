@@ -1,0 +1,16 @@
+github.com/alrusov/bufpool v0.0.0-20191025112713-5a97f7731336 h1:+IacAJUhQjgrD2IG483NOM/Dsdy6s6OehBQ+YnCdFIQ=
+github.com/alrusov/bufpool v0.0.0-20191025112713-5a97f7731336/go.mod h1:WQGPTsMZFX0fE9s+PLloqXgXMjgg6WICjTvqp9aWpNU=
+github.com/alrusov/config v0.0.0-20191028115608-28dcb5224bac h1:nBQOv/PRKlvPuEfGADxQoHNz3YPqQHuuWSavK1YzeZw=
+github.com/alrusov/config v0.0.0-20191028115608-28dcb5224bac/go.mod h1:6i9xcQzSCjdnlX4IOZSY8vAnM8RX8lo79ivlNPhI4Ko=
+github.com/alrusov/log v0.0.0-20191025113219-bd8adec9a431 h1:YACyP+V/oE2yCkmIg/kirCJBao0pW2dHQ7zWozB0NxM=
+github.com/alrusov/log v0.0.0-20191025113219-bd8adec9a431/go.mod h1:MM+0EdChhdCfuqNPC8t+IKFSVvmAN8g4+UuQoaGZVOc=
+github.com/alrusov/misc v0.0.0-20191025113228-ee383e79b872 h1:hOK1J0kUlJKuxoiewI+c/3V5AgvvN7QM4Ty92VInXY4=
+github.com/alrusov/misc v0.0.0-20191025113228-ee383e79b872/go.mod h1:wBrqa+OxoWBI2Z5NLKQ6eDL+Rw6MNK03Eb9LpeZXhvc=
+github.com/alrusov/panic v0.0.0-20191025113257-2f0cf278a883 h1:cAAs5DEHjotRBMw04Fxq466p8nGoSeysbuapMRIl9dM=
+github.com/alrusov/panic v0.0.0-20191025113257-2f0cf278a883/go.mod h1:00VNhoAc1rvVCPZ/Jn/adFHDjf+vl5R0CfPZkdLEl3k=
+github.com/alrusov/stdhttp v0.0.0-20191025113328-ae983c2c0b0b h1:3H7KErx3juxMSG0YC98p2165HScLS8j7782V42H15I0=
+github.com/alrusov/stdhttp v0.0.0-20191025113328-ae983c2c0b0b/go.mod h1:Uj6gkBD53T5Hvz6DAyZBIWnBxPW7aHdVPHqoRhbtUbI=
+github.com/naoina/go-stringutil v0.1.0 h1:rCUeRUHjBjGTSHl0VC00jUPLz8/F9dDzYI70Hzifhks=
+github.com/naoina/go-stringutil v0.1.0/go.mod h1:XJ2SJL9jCtBh+P9q5btrd/Ylo8XwT/h1USek5+NqSA0=
+github.com/naoina/toml v0.1.1 h1:PT/lllxVVN0gzzSqSlHEmP8MJB4MY2U7STGxiouV4X8=
+github.com/naoina/toml v0.1.1/go.mod h1:NBIhNtsFMo3G2szEBne+bO4gS192HuIYRqfvOWb4i1E=
