@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"runtime"
-	"syscall"
 	"time"
 
 	"github.com/alrusov/config"
@@ -20,7 +19,6 @@ import (
 // Application --
 type Application interface {
 	CheckConfig() error
-	CommonConfig() *config.Common
 	NewListener() (*stdhttp.HTTP, error)
 }
 
@@ -72,27 +70,37 @@ func Go(a Application, cfg interface{}) {
 		if ts != "" {
 			ts = " [" + ts + "]"
 		}
-		fmt.Fprintf(os.Stdout, "%s %s%s\n%s\n", misc.AppName(), misc.AppVersion(), ts, misc.Copyright())
-		syscall.Exit(1)
+		fmt.Fprintf(os.Stderr, "%s %s%s\n%s\n", misc.AppName(), misc.AppVersion(), ts, misc.Copyright())
+		os.Exit(1)
 	} else if *configFile == "" {
-		fmt.Fprintf(os.Stdout, "Missing configuration file\nUse:\n")
+		fmt.Fprintf(os.Stderr, "Missing configuration file\nUse:\n")
 		flag.PrintDefaults()
-		syscall.Exit(2)
+		os.Exit(2)
 	} else if err := config.LoadFile(*configFile, cfg); err != nil {
 		log.Message(log.ALERT, "Incorrect config file: %s", err)
-		misc.StopApp(3)
+		os.Exit(3)
 	} else {
-		cc := a.CommonConfig()
+		cc := config.GetCommon()
+		if cc == nil {
+			fmt.Fprintf(os.Stderr, "Config not loaded\n")
+			os.Exit(4)
+		}
+
 		log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
 		log.SetCurrentLogLevel(cc.LogLevel, "")
 		log.Message(log.DEBUG, "Config file:\n%s", string(config.GetText()))
 
 		if err := a.CheckConfig(); err != nil {
 			log.Message(log.ALERT, "Config errors: %s", err.Error())
-			misc.StopApp(4)
+			misc.StopApp(5)
 		} else {
 			if cc.GoMaxProcs > 0 {
 				runtime.GOMAXPROCS(cc.GoMaxProcs)
+			}
+
+			if cc.DeepProfiling {
+				runtime.SetBlockProfileRate(1)
+				runtime.SetMutexProfileFraction(1)
 			}
 
 			if listener, err := a.NewListener(); err != nil {
