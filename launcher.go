@@ -106,7 +106,7 @@ func Go(a Application, cfg interface{}) {
 			if listener, err := a.NewListener(); err != nil {
 				log.Message(log.CRIT, "Create listener error: %s", err.Error())
 			} else {
-				stdhttp.SetName(cc.Name, cc.Description)
+				listener.SetName(cc.Name, cc.Description)
 				go memStats(cc)
 
 				go func() {
