@@ -2,7 +2,6 @@ package launcher
 
 import (
 	"flag"
-	"path/filepath"
 	"strings"
 
 	"github.com/kardianos/service"
@@ -33,7 +32,7 @@ func start(a Application, cc *config.Common) {
 		return
 	}
 
-	cfgFile, _ := filepath.Abs(*configFile)
+	cfgFile, _ := misc.AbsPath(*configFile)
 	servConfig := &service.Config{
 		Name:        cc.Name,
 		DisplayName: cc.Name,
