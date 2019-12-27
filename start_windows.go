@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	serviceCommand = flag.String("service", "", "Service control: "+strings.Join(service.ControlAction[0:], ", "))
+	serviceCommand = flag.String("service", "", "Service control (administrative rights required): "+strings.Join(service.ControlAction[0:], ", "))
 )
 
 //----------------------------------------------------------------------------------------------------------------------------//
