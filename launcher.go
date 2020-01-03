@@ -27,6 +27,19 @@ var (
 	flversion  = flag.Bool("version", false, "Daemon version")
 )
 
+const (
+	exVersion int = iota + 100
+	exMissingConfigFile
+	exIncorrectConfigFile
+	exConfigIncorrect
+	exConfigErrors
+	exCreateListenerError
+	exStartListenerError
+	exServiceInitializationError
+	exServiceError
+	exAccessDenied
+)
+
 //----------------------------------------------------------------------------------------------------------------------------//
 
 // Go --
@@ -43,25 +56,25 @@ func Go(a Application, cfg interface{}) {
 			ts = " [" + ts + "]"
 		}
 		fmt.Fprintf(os.Stderr, "%s %s%s\n%s\n", misc.AppName(), misc.AppVersion(), ts, misc.Copyright())
-		os.Exit(1)
+		os.Exit(exVersion)
 	}
 
 	if *configFile == "" {
 		fmt.Fprintf(os.Stderr, "Missing configuration file\nUse:\n")
 		flag.PrintDefaults()
-		os.Exit(2)
+		os.Exit(exMissingConfigFile)
 	}
 
 	if err := config.LoadFile(*configFile, cfg); err != nil {
 		log.Message(log.ALERT, "Incorrect config file: %s", err)
-		misc.StopApp(3)
+		misc.StopApp(exIncorrectConfigFile)
 		misc.Exit()
 	}
 
 	cc := config.GetCommon()
 	if cc == nil {
-		fmt.Fprintf(os.Stderr, "Config has a bad structure\n")
-		misc.StopApp(4)
+		fmt.Fprintf(os.Stderr, "Config has an incorrect structure\n")
+		misc.StopApp(exConfigIncorrect)
 		misc.Exit()
 	}
 
@@ -71,7 +84,7 @@ func Go(a Application, cfg interface{}) {
 
 	if err := a.CheckConfig(); err != nil {
 		log.Message(log.ALERT, "Config errors: %s", err.Error())
-		misc.StopApp(5)
+		misc.StopApp(exConfigErrors)
 		misc.Exit()
 	}
 
@@ -94,7 +107,7 @@ func processor(a Application, cc *config.Common) {
 	listener, err := a.NewListener()
 	if err != nil {
 		log.Message(log.CRIT, "Create listener error: %s", err.Error())
-		misc.StopApp(6)
+		misc.StopApp(exCreateListenerError)
 		return
 	}
 
@@ -112,7 +125,7 @@ func processor(a Application, cc *config.Common) {
 
 	if err := listener.Start(); err != nil {
 		log.Message(log.CRIT, "Start listener error: %s", err.Error())
-		misc.StopApp(7)
+		misc.StopApp(exStartListenerError)
 		return
 	}
 
