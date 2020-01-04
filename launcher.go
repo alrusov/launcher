@@ -80,7 +80,7 @@ func Go(a Application, cfg interface{}) {
 
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
 	log.SetCurrentLogLevel(cc.LogLevel, "")
-	log.Message(log.DEBUG, "Config file:\n%s", string(config.GetText()))
+	log.Message(log.DEBUG, "Config file:\n>>>\n%s\n<<<", string(config.GetText()))
 
 	if err := a.CheckConfig(); err != nil {
 		log.Message(log.ALERT, "Config errors: %s", err.Error())
