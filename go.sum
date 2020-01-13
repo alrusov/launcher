@@ -1,7 +1,8 @@
 github.com/alrusov/bufpool v0.1.0 h1:rHjiYY6K/KDJtJif87BXAIMe18TsQgligq0b8xHL19E=
 github.com/alrusov/bufpool v0.1.0/go.mod h1:WQGPTsMZFX0fE9s+PLloqXgXMjgg6WICjTvqp9aWpNU=
-github.com/alrusov/config v0.1.2 h1:z3pvyFrWonL81qOpWDCdBqZU5SbdNzCBpF0scvexynk=
 github.com/alrusov/config v0.1.2/go.mod h1:tz1axZ8Hvdrh12jOsuGFb3MHa8kLQtf9z0zRxy8yLcI=
+github.com/alrusov/config v0.1.3 h1:MBIcATKp1FFkW/wwso7vr9Pm5e6OWWX1cdqW0sfxGHQ=
+github.com/alrusov/config v0.1.3/go.mod h1:tz1axZ8Hvdrh12jOsuGFb3MHa8kLQtf9z0zRxy8yLcI=
 github.com/alrusov/loadavg v0.1.0 h1:xjU30OtVjICeGfljn++i2GSpFlQnAqzo+3tvsQB3344=
 github.com/alrusov/loadavg v0.1.0/go.mod h1:PN7KMUy2NVLZTaSM/HcccPRaf0WW+MVMy7ZfaT4ga9s=
 github.com/alrusov/log v0.1.2 h1:RU1EDQRFxa+Zqv9FR/g2L+o0vSisS7SqRhaVvALyQaM=
