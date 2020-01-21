@@ -78,6 +78,7 @@ func Go(a Application, cfg interface{}) {
 		misc.Exit()
 	}
 
+	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
 	log.SetCurrentLogLevel(cc.LogLevel, "")
 	log.Message(log.DEBUG, "Config file:\n>>>\n%s\n<<<", string(config.GetText()))
