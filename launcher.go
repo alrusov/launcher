@@ -53,7 +53,7 @@ func Go(a Application, cfg interface{}) {
 	if *flversion {
 		ts := misc.BuildTime()
 		if ts != "" {
-			ts = " [" + ts + "]"
+			ts = " [" + ts + "Z]"
 		}
 		fmt.Fprintf(os.Stderr, "%s %s%s\n%s\n", misc.AppName(), misc.AppVersion(), ts, misc.Copyright())
 		os.Exit(exVersion)
