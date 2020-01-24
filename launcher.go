@@ -55,7 +55,7 @@ func Go(a Application, cfg interface{}) {
 		if ts != "" {
 			ts = " [" + ts + "Z]"
 		}
-		fmt.Fprintf(os.Stderr, "%s %s%s\n%s\n", misc.AppName(), misc.AppVersion(), ts, misc.Copyright())
+		fmt.Fprintf(os.Stderr, "%s %s%s, %s %s\n%s\n", misc.AppName(), misc.AppVersion(), ts, runtime.GOOS, runtime.GOARCHmisc.Copyright())
 		os.Exit(exVersion)
 	}
 
