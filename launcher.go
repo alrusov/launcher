@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"regexp"
 	"runtime"
 	"time"
 
@@ -23,8 +24,10 @@ type Application interface {
 }
 
 var (
-	configFile = flag.String("config", "", "Configuration file to use")
-	flversion  = flag.Bool("version", false, "Daemon version")
+	configFile             = flag.String("config", "", "Configuration file to use")
+	flversion              = flag.Bool("version", false, "Daemon version")
+	configSecuredRE        = regexp.MustCompile(`(password\s*=\s*")([^"]*)(")`)
+	configSecuredReplaceTo = `$1***$3`
 )
 
 const (
@@ -81,7 +84,7 @@ func Go(a Application, cfg interface{}) {
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
 	log.SetCurrentLogLevel(cc.LogLevel, "")
-	log.Message(log.DEBUG, "Config file:\n>>>\n%s\n<<<", string(config.GetText()))
+	log.SecuredMessage(log.DEBUG, configSecuredRE, configSecuredReplaceTo, "Config file:\n>>>\n%s\n<<<", string(config.GetText()))
 
 	if err := a.CheckConfig(); err != nil {
 		log.Message(log.ALERT, "Config errors: %s", err.Error())
