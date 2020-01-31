@@ -108,6 +108,8 @@ func Go(a Application, cfg interface{}) {
 //----------------------------------------------------------------------------------------------------------------------------//
 
 func processor(a Application, cc *config.Common) {
+	stdhttp.SetMinSizeForGzip(cc.MinSizeForGzip)
+
 	listener, err := a.NewListener()
 	if err != nil {
 		log.Message(log.CRIT, "Create listener error: %s", err.Error())
