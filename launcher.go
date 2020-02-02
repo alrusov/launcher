@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"regexp"
 	"runtime"
 	"time"
 
@@ -24,10 +23,9 @@ type Application interface {
 }
 
 var (
-	configFile             = flag.String("config", "", "Configuration file to use")
-	flversion              = flag.Bool("version", false, "Daemon version")
-	configSecuredRE        = regexp.MustCompile(`(password\s*=\s*")([^"]*)(")`)
-	configSecuredReplaceTo = `$1***$3`
+	configFile = flag.String("config", "", "Configuration file to use")
+	flversion  = flag.Bool("version", false, "Daemon version")
+	logReplace = log.NewReplace()
 )
 
 const (
@@ -41,7 +39,25 @@ const (
 	exServiceInitializationError
 	exServiceError
 	exAccessDenied
+	exProgrammerError
 )
+
+//----------------------------------------------------------------------------------------------------------------------------//
+
+func init() {
+	list := map[string]string{
+		`(password\s*=\s*")(.*)(")`: `$1*$3`,
+		`(users\s*=\s*{)(.*)(})`:    `$1*$3`,
+	}
+
+	for re, replace := range list {
+		err := AddLogFilterForConfig(re, replace)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "launcher.init: %s", err.Error())
+			os.Exit(exProgrammerError)
+		}
+	}
+}
 
 //----------------------------------------------------------------------------------------------------------------------------//
 
@@ -84,7 +100,7 @@ func Go(a Application, cfg interface{}) {
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
 	log.SetCurrentLogLevel(cc.LogLevel, "")
-	log.SecuredMessage(log.DEBUG, configSecuredRE, configSecuredReplaceTo, "Config file:\n>>>\n%s\n<<<", string(config.GetText()))
+	log.SecuredMessage(log.DEBUG, logReplace, "Config file:\n>>>\n%s\n<<<", string(config.GetText()))
 
 	if err := a.CheckConfig(); err != nil {
 		log.Message(log.ALERT, "Config errors: %s", err.Error())
@@ -164,6 +180,13 @@ func memStats(cc *config.Common) {
 			}
 		}
 	}
+}
+
+//----------------------------------------------------------------------------------------------------------------------------//
+
+// AddLogFilterForConfig --
+func AddLogFilterForConfig(exp string, replace string) error {
+	return logReplace.Add(exp, replace)
 }
 
 //----------------------------------------------------------------------------------------------------------------------------//
