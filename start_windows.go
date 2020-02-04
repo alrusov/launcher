@@ -49,17 +49,17 @@ func start(a Application, cc *config.Common) {
 	serv, err := winservice.New(servConfig, handler)
 	if err != nil {
 		log.Message(log.CRIT, "Service initialization error: %s", err.Error())
-		misc.StopApp(exServiceInitializationError)
+		misc.StopApp(misc.ExServiceInitializationError)
 		return
 	}
 
 	err = serv.Go(*serviceCommand)
 	if err != nil {
 		log.Message(log.CRIT, "%s", err)
-		code := exServiceError
+		code := misc.ExServiceError
 		if strings.Contains(err.Error(), "Access is denied") {
 			log.Message(log.CRIT, "Try to run as administrator")
-			code = exAccessDenied
+			code = misc.ExAccessDenied
 		}
 		misc.StopApp(code)
 		return

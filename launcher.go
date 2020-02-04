@@ -28,20 +28,6 @@ var (
 	logReplace = log.NewReplace()
 )
 
-const (
-	exVersion int = iota + 100
-	exMissingConfigFile
-	exIncorrectConfigFile
-	exConfigIncorrect
-	exConfigErrors
-	exCreateListenerError
-	exStartListenerError
-	exServiceInitializationError
-	exServiceError
-	exAccessDenied
-	exProgrammerError
-)
-
 //----------------------------------------------------------------------------------------------------------------------------//
 
 func init() {
@@ -54,7 +40,7 @@ func init() {
 		err := AddLogFilterForConfig(re, replace)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "launcher.init: %s", err.Error())
-			os.Exit(exProgrammerError)
+			os.Exit(misc.ExProgrammerError)
 		}
 	}
 }
@@ -75,25 +61,25 @@ func Go(a Application, cfg interface{}) {
 			ts = " [" + ts + "Z]"
 		}
 		fmt.Fprintf(os.Stderr, "%s %s%s, %s/%s\n%s\n", misc.AppName(), misc.AppVersion(), ts, runtime.GOOS, runtime.GOARCH, misc.Copyright())
-		os.Exit(exVersion)
+		os.Exit(misc.ExVersion)
 	}
 
 	if *configFile == "" {
 		fmt.Fprintf(os.Stderr, "Missing configuration file\nUse:\n")
 		flag.PrintDefaults()
-		os.Exit(exMissingConfigFile)
+		os.Exit(misc.ExMissingConfigFile)
 	}
 
 	if err := config.LoadFile(*configFile, cfg); err != nil {
 		log.Message(log.ALERT, "Incorrect config file: %s", err)
-		misc.StopApp(exIncorrectConfigFile)
+		misc.StopApp(misc.ExIncorrectConfigFile)
 		misc.Exit()
 	}
 
 	cc := config.GetCommon()
 	if cc == nil {
 		fmt.Fprintf(os.Stderr, "Config has an incorrect structure\n")
-		misc.StopApp(exConfigIncorrect)
+		misc.StopApp(misc.ExConfigIncorrect)
 		misc.Exit()
 	}
 
@@ -104,7 +90,7 @@ func Go(a Application, cfg interface{}) {
 
 	if err := a.CheckConfig(); err != nil {
 		log.Message(log.ALERT, "Config errors: %s", err.Error())
-		misc.StopApp(exConfigErrors)
+		misc.StopApp(misc.ExConfigErrors)
 		misc.Exit()
 	}
 
@@ -129,7 +115,7 @@ func processor(a Application, cc *config.Common) {
 	listener, err := a.NewListener()
 	if err != nil {
 		log.Message(log.CRIT, "Create listener error: %s", err.Error())
-		misc.StopApp(exCreateListenerError)
+		misc.StopApp(misc.ExCreateListenerError)
 		return
 	}
 
@@ -147,7 +133,7 @@ func processor(a Application, cc *config.Common) {
 
 	if err := listener.Start(); err != nil {
 		log.Message(log.CRIT, "Start listener error: %s", err.Error())
-		misc.StopApp(exStartListenerError)
+		misc.StopApp(misc.ExStartListenerError)
 		return
 	}
 
