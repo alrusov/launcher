@@ -53,7 +53,7 @@ func Go(a Application, cfg interface{}) {
 	}
 
 	if err := config.LoadFile(*configFile, cfg); err != nil {
-		log.Message(log.ALERT, "Incorrect config file: %s", err)
+		fmt.Fprintf(os.Stderr, "Incorrect config file: %s", err)
 		misc.StopApp(misc.ExIncorrectConfigFile)
 		misc.Exit()
 	}
