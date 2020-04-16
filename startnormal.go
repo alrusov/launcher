@@ -1,3 +1,5 @@
+// +build !windows
+
 package launcher
 
 import "github.com/alrusov/config"
@@ -6,7 +8,7 @@ import "github.com/alrusov/config"
 
 /*
 Nothing special to do.
-A Linux service is simple, logical and self-sufficient.
+A *nix like service is simple, logical and self-sufficient.
 */
 
 func start(a Application, cc *config.Common) {
