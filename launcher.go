@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"runtime/debug"
 	"time"
 
 	"github.com/alrusov/config"
@@ -139,7 +140,8 @@ func memStats(cc *config.Common) {
 			var mem runtime.MemStats
 
 			for {
-				runtime.GC()
+				debug.FreeOSMemory()
+				misc.Sleep(1 * time.Second)
 				runtime.ReadMemStats(&mem)
 				log.Message(level, "AllocSys %d, HeapSys %d, HeapInuse: %d, HeapObjects %d, StackSys: %d, StackInuse: %d; NumCPU: %d; GoMaxProcs: %d; NumGoroutine: %d",
 					mem.Sys, mem.HeapSys, mem.HeapInuse, mem.HeapObjects, mem.StackSys, mem.StackInuse, runtime.NumCPU(), runtime.GOMAXPROCS(-1), runtime.NumGoroutine())
