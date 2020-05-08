@@ -74,7 +74,7 @@ func Go(a Application, cfg interface{}) {
 
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
-	log.SetCurrentLogLevel(cc.LogLevel, "")
+	log.SetCurrentLogLevelForAll(cc.LogLevel, log.FuncNameModeNone)
 	log.Message(log.DEBUG, "Config file:\n>>>\n%s\n<<<", string(config.GetSecuredText()))
 
 	if err := a.CheckConfig(); err != nil {
@@ -140,8 +140,7 @@ func memStats(cc *config.Common) {
 			level = log.DEBUG
 		}
 
-		currlogLevel, _, _ := log.GetCurrentLogLevel()
-		if level <= currlogLevel {
+		if level <= log.CurrentLogLevel() {
 			delay := time.Duration(cc.MemStatsPeriod) * time.Second
 			var mem runtime.MemStats
 
