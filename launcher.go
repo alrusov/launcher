@@ -54,7 +54,7 @@ func Go(a Application, cfg interface{}) {
 	}
 
 	if *configFile == "" {
-		fmt.Fprintf(os.Stderr, "Missing configuration file\nUse:\n")
+		log.Message(log.ALERT, "Missing configuration file\nUse:\n")
 		flag.PrintDefaults()
 		os.Exit(misc.ExMissingConfigFile)
 	}
@@ -67,14 +67,14 @@ func Go(a Application, cfg interface{}) {
 
 	cc := config.GetCommon()
 	if cc == nil {
-		fmt.Fprintf(os.Stderr, "Config has an incorrect structure\n")
+		log.Message(log.ALERT, "Config has an incorrect structure\n")
 		misc.StopApp(misc.ExConfigIncorrect)
 		misc.Exit()
 	}
 
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
-	log.SetCurrentLogLevelForAll(cc.LogLevel, log.FuncNameModeNone)
+	log.SetLogLevels(cc.LogLevel, cc.LogLevels, log.FuncNameModeNone)
 	log.Message(log.DEBUG, "Config file:\n>>>\n%s\n<<<", string(config.GetSecuredText()))
 
 	if err := a.CheckConfig(); err != nil {
