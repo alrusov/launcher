@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/alrusov/config"
+	"github.com/alrusov/jsonw"
 	"github.com/alrusov/log"
 	"github.com/alrusov/misc"
 	"github.com/alrusov/panic"
@@ -71,6 +72,8 @@ func Go(a Application, cfg interface{}) {
 		misc.StopApp(misc.ExConfigIncorrect)
 		misc.Exit()
 	}
+
+	jsonw.UseStd(cc.UseStdJSON)
 
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
