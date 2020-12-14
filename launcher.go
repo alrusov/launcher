@@ -32,7 +32,8 @@ var (
 
 // Go --
 func Go(a Application, cfg interface{}) {
-	defer panic.SaveStackToLog()
+	panicID := panic.ID()
+	defer panic.SaveStackToLogEx(panicID)
 
 	misc.Logger = log.StdLogger
 
@@ -114,7 +115,8 @@ func processor(a Application, cc *config.Common) {
 	go memStats(cc)
 
 	go func() {
-		defer panic.SaveStackToLog()
+		panicID := panic.ID()
+		defer panic.SaveStackToLogEx(panicID)
 		misc.WaitingForStop()
 		log.Message(log.INFO, "Stopping...")
 		listener.Stop()
@@ -134,7 +136,8 @@ func processor(a Application, cc *config.Common) {
 //----------------------------------------------------------------------------------------------------------------------------//
 
 func memStats(cc *config.Common) {
-	defer panic.SaveStackToLog()
+	panicID := panic.ID()
+	defer panic.SaveStackToLogEx(panicID)
 
 	if cc.MemStatsPeriod > 0 {
 		level, ok := log.Str2Level(cc.MemStatsLevel)
