@@ -24,14 +24,19 @@ type Application interface {
 }
 
 var (
-	configFile = flag.String("config", "", "Configuration file to use")
-	flversion  = flag.Bool("version", false, "Daemon version")
+	flagConfigFile   = flag.String("config", "", "Configuration file to use")
+	flagVersion      = flag.Bool("version", false, "Daemon version")
+	flagDumpPanicIDs = flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with TRACE3 level")
 )
 
 //----------------------------------------------------------------------------------------------------------------------------//
 
 // Go --
 func Go(a Application, cfg interface{}) {
+	if *flagDumpPanicIDs {
+		panic.SetDumpStack(true)
+	}
+
 	panicID := panic.ID()
 	defer panic.SaveStackToLogEx(panicID)
 
@@ -39,7 +44,7 @@ func Go(a Application, cfg interface{}) {
 
 	flag.Parse()
 
-	if *flversion {
+	if *flagVersion {
 		ts := misc.BuildTime()
 		if ts != "" {
 			ts = " [" + ts + "Z]"
@@ -54,13 +59,13 @@ func Go(a Application, cfg interface{}) {
 		os.Exit(misc.ExVersion)
 	}
 
-	if *configFile == "" {
+	if *flagConfigFile == "" {
 		log.Message(log.ALERT, "Missing configuration file\nUse:\n")
 		flag.PrintDefaults()
 		os.Exit(misc.ExMissingConfigFile)
 	}
 
-	if err := config.LoadFile(*configFile, cfg); err != nil {
+	if err := config.LoadFile(*flagConfigFile, cfg); err != nil {
 		log.Message(log.ALERT, "Incorrect config file: %s", err)
 		misc.StopApp(misc.ExIncorrectConfigFile)
 		misc.Exit()
