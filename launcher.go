@@ -26,7 +26,7 @@ type Application interface {
 var (
 	flagConfigFile   = flag.String("config", "", "Configuration file to use")
 	flagVersion      = flag.Bool("version", false, "Daemon version")
-	flagDumpPanicIDs = flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with TRACE3 level")
+	flagDumpPanicIDs = flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
 )
 
 //----------------------------------------------------------------------------------------------------------------------------//
