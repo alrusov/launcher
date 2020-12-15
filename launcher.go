@@ -33,6 +33,8 @@ var (
 
 // Go --
 func Go(a Application, cfg interface{}) {
+	flag.Parse()
+
 	if *flagDumpPanicIDs {
 		panic.SetDumpStack(true)
 	}
@@ -41,8 +43,6 @@ func Go(a Application, cfg interface{}) {
 	defer panic.SaveStackToLogEx(panicID)
 
 	misc.Logger = log.StdLogger
-
-	flag.Parse()
 
 	if *flagVersion {
 		ts := misc.BuildTime()
