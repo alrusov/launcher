@@ -60,7 +60,7 @@ func start(a Application, cc *config.Common) {
 		log.Message(log.CRIT, "%s", err)
 		code := misc.ExServiceError
 		if strings.Contains(err.Error(), "Access is denied") {
-			log.Message(log.CRIT, "Try to run as administrator")
+			log.Message(log.CRIT, "Try to run as the Administrator")
 			code = misc.ExAccessDenied
 		}
 		misc.StopApp(code)
