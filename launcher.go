@@ -13,6 +13,8 @@ import (
 	"github.com/alrusov/misc"
 	"github.com/alrusov/panic"
 	"github.com/alrusov/stdhttp"
+
+	_ "time/tzdata" // If the time package cannot find tzdata files on the system, it will use this embedded information
 )
 
 //----------------------------------------------------------------------------------------------------------------------------//
