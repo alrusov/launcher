@@ -153,7 +153,7 @@ func memStats(cc *config.Common) {
 		}
 
 		if level <= log.CurrentLogLevel() {
-			delay := time.Duration(cc.MemStatsPeriod) * time.Second
+			delay := cc.MemStatsPeriod
 			var mem runtime.MemStats
 
 			for {
