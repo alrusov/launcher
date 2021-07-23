@@ -59,18 +59,21 @@ func Go(a Application, cfg interface{}) {
 
 		fmt.Fprintf(os.Stderr, "%s %s%s%s, %s/%s\n%s\n", misc.AppName(), misc.AppVersion(), tags, ts, runtime.GOOS, runtime.GOARCH, misc.Copyright())
 		os.Exit(misc.ExVersion)
+		return // formally for validators
 	}
 
 	if *flagConfigFile == "" {
 		log.Message(log.ALERT, "Missing configuration file\nUse:\n")
 		flag.PrintDefaults()
 		os.Exit(misc.ExMissingConfigFile)
+		return // formally for validators
 	}
 
 	if err := config.LoadFile(*flagConfigFile, cfg); err != nil {
 		log.Message(log.ALERT, "Incorrect config file: %s", err)
 		misc.StopApp(misc.ExIncorrectConfigFile)
 		misc.Exit()
+		return // formally for validators
 	}
 
 	cc := config.GetCommon()
@@ -78,6 +81,7 @@ func Go(a Application, cfg interface{}) {
 		log.Message(log.ALERT, "Config has an incorrect structure\n")
 		misc.StopApp(misc.ExConfigIncorrect)
 		misc.Exit()
+		return // formally for validators
 	}
 
 	jsonw.UseStd(cc.UseStdJSON)
@@ -91,6 +95,7 @@ func Go(a Application, cfg interface{}) {
 		log.Message(log.ALERT, "Config errors: %s", err.Error())
 		misc.StopApp(misc.ExConfigErrors)
 		misc.Exit()
+		return // formally for validators
 	}
 
 	if cc.GoMaxProcs > 0 {
@@ -136,8 +141,6 @@ func processor(a Application, cc *config.Common) {
 		misc.StopApp(misc.ExStartListenerError)
 		return
 	}
-
-	return
 }
 
 //----------------------------------------------------------------------------------------------------------------------------//
