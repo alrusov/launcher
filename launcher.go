@@ -25,16 +25,16 @@ type Application interface {
 	NewListener() (*stdhttp.HTTP, error)
 }
 
-var (
-	flagConfigFile   = flag.String("config", "", "Configuration file to use")
-	flagVersion      = flag.Bool("version", false, "Daemon version")
-	flagDumpPanicIDs = flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
-)
-
 //----------------------------------------------------------------------------------------------------------------------------//
 
 // Go --
 func Go(a Application, cfg interface{}) {
+	defaultConfig, _ := misc.AbsPath(fmt.Sprintf("%s/%s.toml", misc.AppExecPath(), misc.AppName()))
+
+	flagConfigFile := flag.String("config", defaultConfig, "Configuration file to use")
+	flagVersion := flag.Bool("version", false, "Daemon version")
+	flagDumpPanicIDs := flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
+
 	flag.Parse()
 
 	if *flagDumpPanicIDs {
@@ -60,17 +60,6 @@ func Go(a Application, cfg interface{}) {
 		fmt.Fprintf(os.Stderr, "%s %s%s%s, %s/%s\n%s\n", misc.AppName(), misc.AppVersion(), tags, ts, runtime.GOOS, runtime.GOARCH, misc.Copyright())
 		os.Exit(misc.ExVersion)
 		return // formally for validators
-	}
-
-	if *flagConfigFile == "" {
-		var err error
-		*flagConfigFile, err = misc.AbsPath(fmt.Sprintf("%s/%s.toml", misc.AppExecPath(), misc.AppName()))
-		if err != nil {
-			log.Message(log.ALERT, "Missing configuration file\nUse:\n")
-			flag.PrintDefaults()
-			os.Exit(misc.ExMissingConfigFile)
-			return // formally for validators
-		}
 	}
 
 	if err := config.LoadFile(*flagConfigFile, cfg); err != nil {
