@@ -63,10 +63,14 @@ func Go(a Application, cfg interface{}) {
 	}
 
 	if *flagConfigFile == "" {
-		log.Message(log.ALERT, "Missing configuration file\nUse:\n")
-		flag.PrintDefaults()
-		os.Exit(misc.ExMissingConfigFile)
-		return // formally for validators
+		var err error
+		*flagConfigFile, err = misc.AbsPath(fmt.Sprintf("%s/%s.toml", misc.AppExecPath(), misc.AppName()))
+		if err != nil {
+			log.Message(log.ALERT, "Missing configuration file\nUse:\n")
+			flag.PrintDefaults()
+			os.Exit(misc.ExMissingConfigFile)
+			return // formally for validators
+		}
 	}
 
 	if err := config.LoadFile(*flagConfigFile, cfg); err != nil {
