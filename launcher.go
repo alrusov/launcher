@@ -25,6 +25,10 @@ type Application interface {
 	NewListener() (*stdhttp.HTTP, error)
 }
 
+var (
+	cfgFile string
+)
+
 //----------------------------------------------------------------------------------------------------------------------------//
 
 // Go --
@@ -62,7 +66,16 @@ func Go(a Application, cfg interface{}) {
 		return // formally for validators
 	}
 
-	if err := config.LoadFile(*flagConfigFile, cfg); err != nil {
+	var err error
+	cfgFile, err = misc.AbsPath(*flagConfigFile)
+	if err != nil {
+		log.Message(log.ALERT, "Incorrect config file name: %s", err)
+		misc.StopApp(misc.ExIncorrectConfigFile)
+		misc.Exit()
+		return // formally for validators
+	}
+
+	if err := config.LoadFile(cfgFile, cfg); err != nil {
 		log.Message(log.ALERT, "Incorrect config file: %s", err)
 		misc.StopApp(misc.ExIncorrectConfigFile)
 		misc.Exit()

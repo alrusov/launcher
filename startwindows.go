@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package launcher
@@ -34,7 +35,6 @@ func start(a Application, cc *config.Common) {
 		return
 	}
 
-	cfgFile, _ := misc.AbsPath(*flagConfigFile)
 	servConfig := &service.Config{
 		Name:        cc.Name,
 		DisplayName: cc.Name,
