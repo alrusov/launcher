@@ -35,6 +35,7 @@ var (
 func Go(a Application, cfg interface{}) {
 	defaultConfig, _ := misc.AbsPath(fmt.Sprintf("%s/%s.toml", misc.AppExecPath(), misc.AppName()))
 
+	flagEnvFile := flag.String("env", misc.DefaultEnvFile, "Environment file to use")
 	flagConfigFile := flag.String("config", defaultConfig, "Configuration file to use")
 	flagVersion := flag.Bool("version", false, "Daemon version")
 	flagDumpPanicIDs := flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
@@ -70,6 +71,13 @@ func Go(a Application, cfg interface{}) {
 	cfgFile, err = misc.AbsPath(*flagConfigFile)
 	if err != nil {
 		log.Message(log.ALERT, "Incorrect config file name: %s", err)
+		misc.StopApp(misc.ExIncorrectConfigFile)
+		misc.Exit()
+		return // formally for validators
+	}
+
+	if err := misc.LoadEnv(*flagEnvFile); err != nil {
+		log.Message(log.ALERT, "Incorrect environment file: %s", err)
 		misc.StopApp(misc.ExIncorrectConfigFile)
 		misc.Exit()
 		return // formally for validators
