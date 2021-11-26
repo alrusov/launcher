@@ -15,6 +15,12 @@ import (
 	"github.com/alrusov/stdhttp"
 
 	_ "time/tzdata" // If the time package cannot find tzdata files on the system, it will use this embedded information
+
+	authbasic "github.com/alrusov/auth-basic"
+	authjwt "github.com/alrusov/auth-jwt"
+
+	//authkeycloak "github.com/alrusov/auth-keycloak"
+	authkrb5 "github.com/alrusov/auth-krb5"
 )
 
 //----------------------------------------------------------------------------------------------------------------------------//
@@ -138,6 +144,14 @@ func processor(a Application, cc *config.Common) {
 	}
 
 	listener.SetName(cc.Name, cc.Description)
+
+	err = addAuth(listener)
+	if err != nil {
+		log.Message(log.CRIT, "Auth initialization: %s", err.Error())
+		misc.StopApp(misc.ExCreateListenerError)
+		return
+	}
+
 	go memStats(cc)
 
 	go func() {
@@ -155,6 +169,32 @@ func processor(a Application, cc *config.Common) {
 		misc.StopApp(misc.ExStartListenerError)
 		return
 	}
+}
+
+//----------------------------------------------------------------------------------------------------------------------------//
+
+func addAuth(listener *stdhttp.HTTP) (err error) {
+	err = authbasic.Add(listener)
+	if err != nil {
+		return err
+	}
+
+	err = authjwt.Add(listener)
+	if err != nil {
+		return err
+	}
+
+	err = authkrb5.Add(listener)
+	if err != nil {
+		return err
+	}
+
+	//err = authkeycloak.Add(listener)
+	//if err != nil {
+	//	return err
+	//}
+
+	return
 }
 
 //----------------------------------------------------------------------------------------------------------------------------//
