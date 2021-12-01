@@ -39,8 +39,8 @@ github.com/alrusov/auth-basic v0.1.0 h1:QliU8qLnbdJ8W7TeWAdVv2hb2pGXBViJuVN0Xin7
 github.com/alrusov/auth-basic v0.1.0/go.mod h1:/WxLMltc3iqenYb+RwC4TxkaPtyk81NUR0QTvZO7cgI=
 github.com/alrusov/auth-jwt v0.1.0 h1:KySCQOEbuWlNuHeiAsjpuSIdAS0QFeZ0IQwf38embXk=
 github.com/alrusov/auth-jwt v0.1.0/go.mod h1:mB45PLz5fwazGiEQeH/dgirLPJf3DyYWBa4DFxwAtPM=
-github.com/alrusov/auth-keycloak v0.1.1 h1:BdU5LtPaH9+2Ix2ypSDqU5rdEr7yzatNB1057EwVV1Y=
-github.com/alrusov/auth-keycloak v0.1.1/go.mod h1:x4WRFquH9MG9CshqzC2Cy9hDHT07JbzzY7Db0Pu0MTk=
+github.com/alrusov/auth-keycloak v0.1.2 h1:aLIbDc2EfPrQcDd+XAsGs8bZ8Ob99NK943TlcsavB8c=
+github.com/alrusov/auth-keycloak v0.1.2/go.mod h1:x4WRFquH9MG9CshqzC2Cy9hDHT07JbzzY7Db0Pu0MTk=
 github.com/alrusov/auth-krb5 v0.1.0 h1:MyvSo6r0FiKJxd/qAmCjLOSYyj8bDC007WIH2OcPr60=
 github.com/alrusov/auth-krb5 v0.1.0/go.mod h1:sFCbWVBHvmDm+9vtwmjiYScoEHafJL59hzZYjsnnPkY=
 github.com/alrusov/bufpool v0.1.7 h1:zmmEVPKZ5BRxSE2+nkYfNaLXiFezQ42s4gnSZHjbfCU=
