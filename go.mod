@@ -7,6 +7,7 @@ require (
 	github.com/alrusov/auth-jwt v0.1.0
 	github.com/alrusov/auth-keycloak v0.1.2
 	github.com/alrusov/auth-krb5 v0.1.0
+	github.com/alrusov/auth-url v0.1.0
 	github.com/alrusov/config v0.1.43
 	github.com/alrusov/jsonw v0.1.1
 	github.com/alrusov/log v0.1.30

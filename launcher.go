@@ -20,6 +20,7 @@ import (
 	authjwt "github.com/alrusov/auth-jwt"
 	authkeycloak "github.com/alrusov/auth-keycloak"
 	authkrb5 "github.com/alrusov/auth-krb5"
+	authurl "github.com/alrusov/auth-url"
 )
 
 //----------------------------------------------------------------------------------------------------------------------------//
@@ -189,6 +190,11 @@ func addAuth(listener *stdhttp.HTTP) (err error) {
 	}
 
 	err = authkeycloak.Add(listener)
+	if err != nil {
+		return err
+	}
+
+	err = authurl.Add(listener)
 	if err != nil {
 		return err
 	}
