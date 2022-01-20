@@ -3,12 +3,12 @@ module github.com/alrusov/launcher
 go 1.17
 
 require (
-	github.com/alrusov/auth-basic v0.1.0
-	github.com/alrusov/auth-jwt v0.1.2
-	github.com/alrusov/auth-keycloak v0.1.3
-	github.com/alrusov/auth-krb5 v0.1.0
-	github.com/alrusov/auth-url v0.1.0
-	github.com/alrusov/config v0.1.44
+	github.com/alrusov/auth-basic v0.1.1
+	github.com/alrusov/auth-jwt v0.1.3
+	github.com/alrusov/auth-keycloak v0.1.4
+	github.com/alrusov/auth-krb5 v0.1.1
+	github.com/alrusov/auth-url v0.1.1
+	github.com/alrusov/config v0.1.45
 	github.com/alrusov/jsonw v0.1.1
 	github.com/alrusov/log v0.1.31
 	github.com/alrusov/misc v0.1.49
@@ -34,7 +34,7 @@ require (
 	github.com/naoina/go-stringutil v0.1.0 // indirect
 	github.com/naoina/toml v0.1.1 // indirect
 	github.com/pquerna/cachecontrol v0.1.0 // indirect
-	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871 // indirect
+	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
 	golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1 // indirect
