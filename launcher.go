@@ -107,7 +107,7 @@ func Go(a Application, cfg interface{}) {
 	jsonw.UseStd(cc.UseStdJSON)
 
 	log.MaxLen(cc.LogMaxStringLen)
-	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, cc.LogBufferDelay)
+	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, time.Duration(cc.LogBufferDelay))
 	log.SetLogLevels(cc.LogLevel, cc.LogLevels, log.FuncNameModeNone)
 	log.Message(log.DEBUG, "Config file:\n>>>\n%s\n<<<", string(config.GetSecuredText()))
 
@@ -224,7 +224,7 @@ func memStats(cc *config.Common) {
 				runtime.ReadMemStats(&mem)
 				log.Message(level, "AllocSys %d, HeapSys %d, HeapInuse: %d, HeapObjects %d, StackSys: %d, StackInuse: %d; NumCPU: %d; GoMaxProcs: %d; NumGoroutine: %d",
 					mem.Sys, mem.HeapSys, mem.HeapInuse, mem.HeapObjects, mem.StackSys, mem.StackInuse, runtime.NumCPU(), runtime.GOMAXPROCS(-1), runtime.NumGoroutine())
-				if !misc.Sleep(delay) {
+				if !misc.Sleep(time.Duration(delay)) {
 					break
 				}
 			}
