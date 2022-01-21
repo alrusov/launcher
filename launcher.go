@@ -45,8 +45,13 @@ func Go(a Application, cfg interface{}) {
 	flagConfigFile := flag.String("config", defaultConfig, "Configuration file to use")
 	flagVersion := flag.Bool("version", false, "Daemon version")
 	flagDumpPanicIDs := flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
+	flagDebug := flag.Bool("debug", false, "Debug mode")
 
 	flag.Parse()
+
+	if *flagDebug {
+		panic.Disable()
+	}
 
 	if *flagDumpPanicIDs {
 		panic.SetDumpStack(true)
