@@ -45,6 +45,7 @@ func Go(a Application, cfg interface{}) {
 	flagConfigFile := flag.String("config", defaultConfig, "Configuration file to use")
 	flagVersion := flag.Bool("version", false, "Daemon version")
 	flagDumpPanicIDs := flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
+	flagDisableConsoleLog := flag.Bool("disable-console-log", false, "Disable console log")
 	flagDebug := flag.Bool("debug", false, "Debug mode")
 
 	flag.Parse()
@@ -110,6 +111,10 @@ func Go(a Application, cfg interface{}) {
 	}
 
 	jsonw.UseStd(cc.UseStdJSON)
+
+	if *flagDisableConsoleLog {
+		log.SetConsoleWriter(nil)
+	}
 
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, time.Duration(cc.LogBufferDelay))
