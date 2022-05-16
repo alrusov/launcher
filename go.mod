@@ -1,6 +1,6 @@
 module github.com/alrusov/launcher
 
-go 1.17
+go 1.18
 
 require (
 	github.com/alrusov/auth-basic v0.1.1
@@ -9,11 +9,11 @@ require (
 	github.com/alrusov/auth-krb5 v0.1.2
 	github.com/alrusov/auth-url v0.1.1
 	github.com/alrusov/config v0.1.46
-	github.com/alrusov/jsonw v0.1.1
-	github.com/alrusov/log v0.1.31
-	github.com/alrusov/misc v0.1.53
+	github.com/alrusov/jsonw v0.1.2
+	github.com/alrusov/log v0.1.32
+	github.com/alrusov/misc v0.1.55
 	github.com/alrusov/panic v0.1.14
-	github.com/alrusov/stdhttp v0.1.100
+	github.com/alrusov/stdhttp v0.1.103
 	github.com/alrusov/winservice v0.1.9
 	github.com/kardianos/service v1.2.1
 )
@@ -27,9 +27,9 @@ require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
 	github.com/jcmturner/gofork v1.0.0 // indirect
-	github.com/json-iterator/go v1.1.10 // indirect
+	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
-	github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742 // indirect
+	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/naoina/go-stringutil v0.1.0 // indirect
 	github.com/naoina/toml v0.1.1 // indirect
 	github.com/pquerna/cachecontrol v0.1.0 // indirect

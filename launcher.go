@@ -63,6 +63,10 @@ func Go(a Application, cfg interface{}) {
 
 	misc.Logger = log.StdLogger
 
+	if *flagDisableConsoleLog {
+		log.SetConsoleWriter(nil)
+	}
+
 	if *flagVersion {
 		ts := misc.BuildTime()
 		if ts != "" {
@@ -111,10 +115,6 @@ func Go(a Application, cfg interface{}) {
 	}
 
 	jsonw.UseStd(cc.UseStdJSON)
-
-	if *flagDisableConsoleLog {
-		log.SetConsoleWriter(nil)
-	}
 
 	log.MaxLen(cc.LogMaxStringLen)
 	log.SetFile(cc.LogDir, "", cc.LogLocalTime, cc.LogBufferSize, time.Duration(cc.LogBufferDelay))
