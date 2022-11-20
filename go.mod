@@ -1,6 +1,6 @@
 module github.com/alrusov/launcher
 
-go 1.18
+go 1.19
 
 require (
 	github.com/alrusov/auth-basic v0.1.1
@@ -8,19 +8,19 @@ require (
 	github.com/alrusov/auth-keycloak v0.1.5
 	github.com/alrusov/auth-krb5 v0.1.2
 	github.com/alrusov/auth-url v0.1.1
-	github.com/alrusov/config v0.1.46
-	github.com/alrusov/jsonw v0.1.2
-	github.com/alrusov/log v0.1.32
-	github.com/alrusov/misc v0.1.55
-	github.com/alrusov/panic v0.1.14
-	github.com/alrusov/stdhttp v0.1.103
-	github.com/alrusov/winservice v0.1.9
-	github.com/kardianos/service v1.2.1
+	github.com/alrusov/config v0.1.47
+	github.com/alrusov/jsonw v0.1.3
+	github.com/alrusov/log v0.1.33
+	github.com/alrusov/misc v1.0.65
+	github.com/alrusov/panic v0.1.15
+	github.com/alrusov/stdhttp v0.1.106
+	github.com/alrusov/winservice v0.1.10
+	github.com/kardianos/service v1.2.2
 )
 
 require (
-	github.com/alrusov/auth v0.1.1 // indirect
-	github.com/alrusov/loadavg v0.1.4 // indirect
+	github.com/alrusov/auth v0.1.2 // indirect
+	github.com/alrusov/loadavg v0.1.5 // indirect
 	github.com/coreos/go-oidc v2.2.1+incompatible // indirect
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect

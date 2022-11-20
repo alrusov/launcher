@@ -38,7 +38,7 @@ var (
 //----------------------------------------------------------------------------------------------------------------------------//
 
 // Go --
-func Go(a Application, cfg interface{}) {
+func Go(a Application, cfg any) {
 	defaultConfig, _ := misc.AbsPath(fmt.Sprintf("%s/%s.toml", misc.AppExecPath(), misc.AppName()))
 
 	flagEnvFile := flag.String("env", misc.DefaultEnvFile, "Environment file to use")
