@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/alrusov/config"
@@ -41,7 +42,7 @@ var (
 func Go(a Application, cfg any) {
 	defaultConfig, _ := misc.AbsPath(fmt.Sprintf("%s/%s.toml", misc.AppExecPath(), misc.AppName()))
 
-	flagEnvFile := flag.String("env", misc.DefaultEnvFile, "Environment file to use")
+	flagEnvFiles := flag.String("env", "", "Environment files to use")
 	flagConfigFile := flag.String("config", defaultConfig, "Configuration file to use")
 	flagVersion := flag.Bool("version", false, "Daemon version")
 	flagDumpPanicIDs := flag.Bool("dump-panic-ids", false, "Dump panic IDs to log with ALERT level")
@@ -92,11 +93,25 @@ func Go(a Application, cfg any) {
 		return // formally for validators
 	}
 
-	if err := misc.LoadEnv(*flagEnvFile); err != nil {
-		log.Message(log.ALERT, "Incorrect environment file: %s", err)
-		misc.StopApp(misc.ExIncorrectConfigFile)
-		misc.Exit()
-		return // formally for validators
+	envFiles := []string{".env", ".env-local"}
+	stdEnv := true
+
+	if len(*flagEnvFiles) != 0 {
+		envFiles = strings.Split(*flagEnvFiles, ",")
+		stdEnv = false
+	}
+
+	for _, fn := range envFiles {
+		fn = strings.TrimSpace(fn)
+		if fn == "" {
+			continue
+		}
+		if err := misc.LoadEnv(fn); err != nil && !stdEnv {
+			log.Message(log.ALERT, "Incorrect environment file: %s", err)
+			misc.StopApp(misc.ExIncorrectConfigFile)
+			misc.Exit()
+			return // formally for validators
+		}
 	}
 
 	if err := config.LoadFile(cfgFile, cfg); err != nil {
