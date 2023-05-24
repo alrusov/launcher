@@ -3,11 +3,11 @@ module github.com/alrusov/launcher
 go 1.20
 
 require (
-	github.com/alrusov/auth-basic v0.1.3
-	github.com/alrusov/auth-jwt v0.1.9
-	github.com/alrusov/auth-keycloak v0.1.7
-	github.com/alrusov/auth-krb5 v0.1.3
-	github.com/alrusov/auth-url v0.1.3
+	github.com/alrusov/auth-basic v0.1.4
+	github.com/alrusov/auth-jwt v0.1.10
+	github.com/alrusov/auth-keycloak v0.1.8
+	github.com/alrusov/auth-krb5 v0.1.4
+	github.com/alrusov/auth-url v0.1.4
 	github.com/alrusov/config v0.1.56
 	github.com/alrusov/jsonw v0.1.3
 	github.com/alrusov/log v0.1.37
@@ -19,7 +19,7 @@ require (
 )
 
 require (
-	github.com/alrusov/auth v0.1.4 // indirect
+	github.com/alrusov/auth v0.1.5 // indirect
 	github.com/alrusov/loadavg v0.1.5 // indirect
 	github.com/coreos/go-oidc v2.2.1+incompatible // indirect
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1 // indirect
