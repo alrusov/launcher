@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/alrusov/auth-basic v0.1.4
-	github.com/alrusov/auth-jwt v0.1.12
+	github.com/alrusov/auth-jwt v0.1.13
 	github.com/alrusov/auth-keycloak v0.1.8
 	github.com/alrusov/auth-krb5 v0.1.4
 	github.com/alrusov/auth-url v0.1.4
