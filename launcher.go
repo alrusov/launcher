@@ -53,6 +53,7 @@ func Go(a Application, cfg any) {
 
 	if *flagDebug {
 		panic.Disable()
+		misc.SetDebugMode(true)
 	}
 
 	if *flagDumpPanicIDs {
