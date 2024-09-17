@@ -248,7 +248,8 @@ func memStats(cc *config.Common) {
 				//debug.FreeOSMemory()
 				misc.Sleep(1 * time.Second)
 				runtime.ReadMemStats(&mem)
-				log.Message(level, "AllocSys %d, HeapSys %d, HeapInuse: %d, HeapObjects %d, StackSys: %d, StackInuse: %d; NumCPU: %d; GoMaxProcs: %d; NumGoroutine: %d",
+				log.Message(level, "Uptime %d, AllocSys %d, HeapSys %d, HeapInuse: %d, HeapObjects %d, StackSys: %d, StackInuse: %d; NumCPU: %d; GoMaxProcs: %d; NumGoroutine: %d",
+					int64(misc.NowUTC().Sub(misc.AppStartTime()).Seconds()),
 					mem.Sys, mem.HeapSys, mem.HeapInuse, mem.HeapObjects, mem.StackSys, mem.StackInuse, runtime.NumCPU(), runtime.GOMAXPROCS(-1), runtime.NumGoroutine())
 				if !misc.Sleep(delay.D()) {
 					break
