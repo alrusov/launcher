@@ -190,6 +190,8 @@ func processor(a Application, cc *config.Common) {
 
 	log.Message(log.INFO, "Press Ctrl+C for exit")
 
+	misc.Initialized()
+
 	if err := listener.Start(); err != nil {
 		log.Message(log.CRIT, "Start listener error: %s", err.Error())
 		misc.StopApp(misc.ExStartListenerError)
