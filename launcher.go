@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"runtime/debug"
 	"strings"
 	"time"
 
@@ -146,6 +147,10 @@ func Go(a Application, cfg any) {
 
 	if cc.GoMaxProcs > 0 {
 		runtime.GOMAXPROCS(cc.GoMaxProcs)
+	}
+
+	if cc.GCPercent > 0 {
+		debug.SetGCPercent(cc.GCPercent)
 	}
 
 	if cc.DeepProfiling {
