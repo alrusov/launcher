@@ -5,7 +5,7 @@ go 1.27.2
 require (
 	github.com/alrusov/auth-basic v0.1.6
 	github.com/alrusov/auth-jwt v0.1.18
-	github.com/alrusov/auth-keycloak v0.1.12
+	github.com/alrusov/auth-keycloak v0.1.13
 	github.com/alrusov/auth-krb5 v0.1.7
 	github.com/alrusov/auth-url v0.1.6
 	github.com/alrusov/config v0.1.75
@@ -22,7 +22,6 @@ require (
 	github.com/alrusov/auth v0.1.12 // indirect
 	github.com/alrusov/loadavg v0.1.6 // indirect
 	github.com/coreos/go-oidc v2.4.0+incompatible // indirect
-	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1 // indirect
 	github.com/essentialkaos/translit v2.0.3+incompatible // indirect
 	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
