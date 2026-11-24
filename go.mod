@@ -8,7 +8,7 @@ require (
 	github.com/alrusov/auth-keycloak v0.1.12
 	github.com/alrusov/auth-krb5 v0.1.7
 	github.com/alrusov/auth-url v0.1.6
-	github.com/alrusov/config v0.1.74
+	github.com/alrusov/config v0.1.75
 	github.com/alrusov/jsonw v0.1.3
 	github.com/alrusov/log v0.1.40
 	github.com/alrusov/misc v1.1.37
